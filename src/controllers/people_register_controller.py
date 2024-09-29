@@ -26,9 +26,8 @@ class PeopleRegisterController:
         # verifica se o nome é uma string
 #        try: str(new_person_informations["name"])
 #        except: raise Exception("Campo nome incorreto")
-        if isinstance(new_person_informations["name"], str):
+        if not isinstance(new_person_informations["name"], str):
             raise Exception("Campo nome incorreto!")
-        
         # verifica se campo peso é um número inteiro (em gramas)
         try: int(new_person_informations["weight"])
         except: raise Exception("Campo peso incorreto")

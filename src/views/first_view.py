@@ -2,10 +2,9 @@ def introduction_page():
     message = '''
         Sistema Cadastral
 
-        * Cadastrar pessoa - 1
-        * Buscar pessoa por nome - 2
+        * Cadastrar Pessoa - 1
+        * Buscar Pessoa Por Nome - 2
         * Sair - 5
-
     '''
 
     print(message)

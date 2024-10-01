@@ -9,4 +9,5 @@ def start() -> None:
         if command == '1': people_register_constructor()
         elif command == '2': people_finder_constructor()
         elif command == '5': exit()
-        else: print('\n Comando não encontrado!! \n\n')
+        else: print('\n Comando nao encontrado!! \n\n')
+    

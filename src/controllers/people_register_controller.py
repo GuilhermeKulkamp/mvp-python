@@ -1,42 +1,35 @@
 from typing import Dict
+from src.models.repository.person_repository import person_repository
+from src.models.entities.person import Person
 
 class PeopleRegisterController:
     def register(self, new_person_informations: Dict) -> Dict:
-
-        # se tudo der certo retorna o sucesso
         try:
-            # validar campos
-            self.__validation_field(new_person_informations)
-
-            # enviar para models para cadastro de dados
-            # TODO: criar models
-
-            # formatar a resposta
+            self.__validate_fields(new_person_informations)
+            self.__create_person_entity_and_store(new_person_informations)
             response = self.__format_response(new_person_informations)
+            return { "success": True, "message": response }
+        except Exception as exception:
+            return { "success": False, "error": str(exception) }
 
-            # retorna sucesso
-            return {"success": True, "message": response}
-        
-        # se houver erro retorna o erro
-        except Exception as exception: 
-            return {"success": False, "error": str(exception)}
-    
-    # Regras de validação
-    def __validation_field(self, new_person_informations: Dict) -> None:
-        # verifica se o nome é uma string
-#        try: str(new_person_informations["name"])
-#        except: raise Exception("Campo nome incorreto")
+    def __validate_fields(self, new_person_informations: Dict) -> None:
         if not isinstance(new_person_informations["name"], str):
-            raise Exception("Campo nome incorreto!")
-        # verifica se campo peso é um número inteiro (em gramas)
-        try: int(new_person_informations["weight"])
-        except: raise Exception("Campo peso incorreto")
+            raise Exception('Campo Nome Incorreto!')
 
-        # verifica se campo altura é um número inteiro (em centímetros)
+        try: int(new_person_informations["age"])
+        except: raise Exception('Campo Idade Incorreto!')
+
         try: int(new_person_informations["height"])
-        except: raise Exception("Campo altura incorreto")
+        except: raise Exception('Campo Altura Incorreto!')
 
-    # Formata a resposta para a view
+    def __create_person_entity_and_store(self, new_person_informations: Dict) -> None:
+        name = new_person_informations["name"]
+        age = new_person_informations["age"]
+        height = new_person_informations["height"]
+
+        new_person = Person(name, age, height)
+        person_repository.registry_person(new_person)
+
     def __format_response(self, new_person_informations: Dict) -> Dict:
         return {
             "count": 1,

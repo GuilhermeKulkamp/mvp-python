@@ -2,49 +2,42 @@ import os
 from typing import Dict
 
 class PeopleRegisterView:
-    # página inicial 
     def registry_person_view(self) -> Dict:
-        os.system("cls||clear")
+        os.system('cls||clear')
 
-
-        print("Cadastrar nova pessoa \n\n")
-
-        name = input('Informe o Nome: ')
-        weight = input('Informe o Peso (em gramas): ') 
-        height = input('Informe a Altura (em centímetros): ')
+        print('Cadastrar Nova Pessoa \n\n')
+        name = input('Determine o nome da pessoa: ')
+        age = input('Determine a idade da pessoa: ')
+        height = input('Determine a altura da pessoa: ')
 
         new_person_informations = {
-            "name": name, "weight": weight, "height": height
+            "name": name, "age": age, "height": height
         }
 
         return new_person_informations
-    
-    # página de sucesso
+
+
     def registry_person_success(self, message: Dict) -> None:
-        os.system("cls||clear")
+        os.system('cls||clear')
 
         success_message = f'''
-            Usuário cadastrado com sucesso!
+            Usuario cadastrado com sucesso!
 
-            Tipo: {message["type"]}
-            Registros: {message["count"]}
+            Tipo: { message["type"] }
+            Registros: { message["count"] }
             Infos:
-                Nome: {message["attributes"]["name"]}
-                Altura: {message["attributes"]["height"]}
-                Peso: {message["attributes"]["weight"]}
-
-            '''
-        
-        print(success_message)
-    
-    #página da falha
-    def registry_person_fail(self, error: str) -> None:
-        os.system("cls||clear")
-
-        error_message = f'''
-            Falha ao cadastrar o usuário!
-
-            Erro: {error} 
+                Nome: { message["attributes"]["name"] }
+                Idade: { message["attributes"]["age"] }
         '''
+        print(success_message)
 
-        print(error_message)
+
+    def registry_person_fail(self, error: str) -> None:
+        os.system('cls||clear')
+
+        fail_message = f'''
+            Falha ao cadastrar usuario!
+
+            Erro: { error }
+        '''
+        print(fail_message)
